@@ -1,13 +1,16 @@
+
+
 //tools
+var sget = require("sget");
 
 //instantiate the input/output system
 var userInput = require('readline');
 var userPrompt = userInput.createInterface(process.stdin, process.stdout);
 
-/* User Question Code...
+/* User Question Code (prompt)
 
 userPrompt.question("", function(entry) {
-
+	
 });
 
 */
