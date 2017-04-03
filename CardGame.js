@@ -94,15 +94,15 @@ function Card(value, name, suit){
 
 //functions
 
-/*function dealCards() {
+function dealCards() {
 	//For each player that exists, execute this draw card fuction.
 	for (int i in numOfPlayers) {
 		//For each player, they must draw 5 cards.
-		for (int x in cardHand)
+		for (var x; x <= cardHand; x++) {
 			//Find a random card from the shuffled deck
-			var cardPos = Math.floor((Math.random() * shuffledDeck.length()) + 1);
+			var cardPos = Math.floor((Math.random() * shuffledDeck.length()) + 0);
 			//Take the card from that position
-			var drawnCard = shuffledDeck.shift(cardPos);
+			var drawnCard = shuffledDeck.splice(cardPos);
 			//Place that card into the player's hand.
 			players[i].push(drawnCard);
 
@@ -114,9 +114,12 @@ function Card(value, name, suit){
 }
 
 
+var exitProgram= function() {
+	console.log("You have exited the Card Suite!");
+	process.exit();
+};
 
 
-*/
 
 //runners
 
