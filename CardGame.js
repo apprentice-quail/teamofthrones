@@ -126,5 +126,8 @@ var exitProgram= function() {
 
 
 
+var runProgram = function() {
+	welcomeScreen();
+}();
 
 
