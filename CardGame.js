@@ -33,6 +33,18 @@ var wipeScreen = function () {
 
 
 
+var welcomeScreen = function() {
+	var gameSelection = sget("Welcome to the Cards Suite! What game would you like to play?\n (1) Poker\n(2) Quit").trim();
+	if (gameSelection == 1) {
+		dealCards();	
+	} else if (gameSelection ==2) {
+		exitProgram();
+	} else { console.log("Listen fancypants, stop that.");
+		welcomeScreen();
+	}
+
+};
+
 
 
 //variables
@@ -108,7 +120,6 @@ function Card(value, name, suit){
 
 //runners
 
-deck();
 
 
 
