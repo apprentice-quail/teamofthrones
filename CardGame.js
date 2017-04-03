@@ -26,7 +26,7 @@ var sleep = function(milliseconds) {
     }
 };
 
-//wipe  screen
+//wipe screen
 var wipeScreen = function () {
   return process.stdout.write('\033c');
 };
@@ -37,30 +37,52 @@ var wipeScreen = function () {
 
 //variables
 
-
-
-
+//icons: ♣︎ ♦︎ ♥︎ ♠︎
+//newDeck = [♣︎13♦13︎♥13︎♠13︎];
+//shuffledDeck = [];
+//discardPile = [];
+//players = [];
+//cardHand = 5;
+//
 
 
 
 
 //constructors
 
+/*
 
 
 
 
 
-
+*/
 
 //functions
 
+/*function dealCards() {
+	//For each player that exists, execute this draw card fuction.
+	for (int i in numOfPlayers) {
+		//For each player, they must draw 5 cards.
+		for (int x in cardHand)
+			//Find a random card from the shuffled deck
+			var cardPos = Math.floor((Math.random() * shuffledDeck.length()) + 1);
+			//Take the card from that position
+			var drawnCard = shuffledDeck.shift(cardPos);
+			//Place that card into the player's hand.
+			players[i].push(drawnCard);
+
+			
+		}
+		
+	}
+
+}
 
 
 
 
-
-
+*/
 
 //runners
 
