@@ -49,12 +49,14 @@ var welcomeScreen = function() {
 
 //variables
 
-//icons: ♣︎ ♦︎ ♥︎ ♠︎
-//newDeck = [♣︎13♦13︎♥13︎♠13︎];
-//shuffledDeck = [];
-//discardPile = [];
-//players = [];
-//cardHand = 5;
+// icons: ♣︎ ♦︎ ♥︎ ♠︎
+// newDeck = [♣︎13♦13︎♥13︎♠13︎];
+// shuffledDeck = [];
+// discardPile = [];
+numOfPlayers = 2;
+players = []; 
+playerHand = [];
+cardHand = 5;
 //
 var name;
 var suit;
@@ -70,47 +72,66 @@ function Card(value, name, suit){
 };
 
  var deck = function (){
-	this.names = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-	this.suits = ['Hearts','Diamonds','Spades','Clubs'];
+	names = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+	suits = ['♥︎','♦︎','♠︎','♣︎'];
 	
     
-    for( var s = 0; s < this.suits.length; s++ ) {
-        for( var n = 0; n < this.names.length; n++ ) {
-            cards.push( new Card( n+1, this.names[n], this.suits[s] ) );
+    for( var s = 0; s < suits.length; s++ ) {
+        for( var n = 0; n < names.length; n++ ) {
+            cards.push( new Card( n+1, names[n], suits[s] ) );
         }
-    }
-
-    
-    //return cards;
-    console.log(cards);
+    }    
+    // return cards;
+    // console.log(cards);
  }
 /*
-
-//
-
-
 
 */
 
 //functions
 
 function dealCards() {
+	// console.log(cards);
 	//For each player that exists, execute this draw card fuction.
-	for (int i in numOfPlayers) {
+	for (var eachPlayer = 0; eachPlayer <= numOfPlayers; eachPlayer++) {
 		//For each player, they must draw 5 cards.
-		for (var x; x <= cardHand; x++) {
+		for (var x = 0; x <= cardHand - 1; x++) {
 			//Find a random card from the shuffled deck
-			var cardPos = Math.floor((Math.random() * shuffledDeck.length()) + 0);
-			//Take the card from that position
-			var drawnCard = shuffledDeck.splice(cardPos);
-			//Place that card into the player's hand.
-			players[i].push(drawnCard);
+			var cardPos = Math.floor((Math.random() * cards.length) + 0);
 
+			// console.log("Deck Position: "+cardPos);
+			//Take the card from that position
+
+			// console.log(cards[cardPos]);
+			var drawnCard = cards.splice(cardPos,1);
+
+			//drawn card
+			// console.log("Card drawn is: "+drawnCard);
+
+			//Place that card into the player's hand.
+			playerHand.push(drawnCard);
+			
 			
 		}
+
+
+		//Players
+			//playerHand
+				//object(value,name,suit)
+
+		// console.log(playerHand);
+		console.log(playerHand[0][0].suit + playerHand[0][0].name)
+
+		players.push(playerHand);
+
+		//
+		// console.log("First card in player "+players[eachPlayer]+"'s hand: "+players[0].playerHand[0].Card.name);
+
+		//empty playerHand container for a fresh new set of cards for a hand
+		playerHand = [];
 		
 	}
-
+	// console.log("Check 3");
 }
 
 
@@ -122,7 +143,8 @@ var exitProgram= function() {
 
 
 //runners
-
+deck();
+dealCards();
 
 
 
