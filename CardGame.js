@@ -4,8 +4,8 @@
 var sget = require("sget");
 
 //instantiate the input/output system
-var userInput = require('readline');
-var userPrompt = userInput.createInterface(process.stdin, process.stdout);
+// var userInput = require('readline');
+// var userPrompt = userInput.createInterface(process.stdin, process.stdout);
 
 /* User Question Code (prompt)
 
@@ -14,7 +14,10 @@ userPrompt.question("", function(entry) {
 });
 
 */
-
+var exitProgram= function() {
+	console.log("You have exited the Card Suite!");
+	process.exit();
+};
 
 //sleep function
 var sleep = function(milliseconds) {
@@ -31,19 +34,38 @@ var wipeScreen = function () {
   return process.stdout.write('\033c');
 };
 
-
+var numOfPlayers;
 
 var welcomeScreen = function() {
-	var gameSelection = sget("Welcome to the Cards Suite! What game would you like to play?\n (1) Poker\n(2) Quit").trim();
+	var gameSelection = sget("Welcome to the Cards Suite! What game would you like to play?\n(1)Poker\n(2)Quit").trim();
 	if (gameSelection == 1) {
-		dealCards();	
-	} else if (gameSelection ==2) {
+		playerCount();
+		// dealCards();	
+	} else if (gameSelection == 2) {
 		exitProgram();
-	} else { console.log("Listen fancypants, stop that.");
+	} else { 
+		console.log("Listen fancypants, stop that.");
 		welcomeScreen();
 	}
 
 };
+
+var playerCount = function() {
+	var totalPlayers = sget("Select a number of players (2-7).").trim();
+	if (totalPlayers.length >1){
+		console.log("Please enter a number between 2-7.");
+		playerCount();
+	} else if (totalPlayers >=2 && totalPlayers<=7){
+		console.log("You have selected " + totalPlayers + " players.");
+		numOfPlayers = totalPlayers;
+		teststuff();
+	} else {console.log("Please enter a valid number.");
+		playerCount();}
+};
+
+teststuff = function(){
+	console.log(numOfPlayers);
+}
 
 
 
@@ -53,145 +75,138 @@ var welcomeScreen = function() {
 // newDeck = [♣︎13♦13︎♥13︎♠13︎];
 // shuffledDeck = [];
 // discardPile = [];
-var drawnCards = [];
-numOfPlayers = 1;
-players = []; 
-playerHand = [];
-cardHand = 5;
-//
-var name;
-var suit;
-var value;
-var cards=[];
-var drawnCard;
+// var drawnCards = [];
+// numOfPlayers = 1;
+// players = []; 
+// playerHand = [];
+// cardHand = 5;
+// //
+// var name;
+// var suit;
+// var value;
+// var cards=[];
+// var drawnCard;
 
-//constructors
+// //constructors
 
-function Card(value, name, suit){
-	this.value = value;
-	this.name = name;
-	this.suit = suit;
-};
+// function Card(value, name, suit){
+// 	this.value = value;
+// 	this.name = name;
+// 	this.suit = suit;
+// };
 
- var deck = function (){
-	names = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
-	suits = ['♥︎','♦︎','♠︎','♣︎'];
+//  var deck = function (){
+// 	names = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+// 	suits = ['♥︎','♦︎','♠︎','♣︎'];
 	
     
-    for( var s = 0; s < suits.length; s++ ) {
-        for( var n = 0; n < names.length; n++ ) {
-            cards.push( new Card( n+1, names[n], suits[s] ) );
-        }
-    }    
-    // return cards;
-    // console.log(cards);
- }
-/*
+//     for( var s = 0; s < suits.length; s++ ) {
+//         for( var n = 0; n < names.length; n++ ) {
+//             cards.push( new Card( n+1, names[n], suits[s] ) );
+//         }
+//     }    
+//     // return cards;
+//     // console.log(cards);
+//  }
+// /*
 
-*/
+// */
 
-//functions
-
-
-var checkDrawnCards = function() {
-	for(var c in drawnCards) {
-		if ( cardPos != drawnCards[c]){
-			dealCards();
-		}
-	}
-}
-function dealCards() {
-	// console.log(cards);
-	//For each player that exists, execute this draw card fuction.
-
-	for (var eachPlayer = 0; eachPlayer <= numOfPlayers; eachPlayer++) {
-		//For each player, they must draw 5 cards.
-		for (var x = 0; x <= cardHand - 1; x++) {
-			//Find a random card from the shuffled deck
-			var cardPos = Math.floor((Math.random() * cards.length) + 0);
-
-			checkDrawnCards();
-			 //console.log("Deck Position: "+cardPos);
-			//Take the card from that position
-
-			// console.log(cards[cardPos]);
-			drawnCards.push(cardPos);
+// //functions
 
 
-			
-			//drawn card
-			
-
-			//Place that card into the player's hand.
-			playerHand.push(cardPos);
-
-			
-		}
-
-		var newHand = new Hand();
-		//console.log(newHand);
-		players.push(newHand);
-		console.log(players);
-		//Players
-			//playerHand
-				//object(value,name,suit)
-
-		// console.log(playerHand);
-		// console.log(playerHand[0][0].suit + playerHand[0][0].name)
-
-		// players.push(playerHand);
-
-		//
-		// console.log("First card in player "+players[eachPlayer]+"'s hand: "+players[0].playerHand[0].Card.name);
-
-		//empty playerHand container for a fresh new set of cards for a hand
-		playerHand = [];
-		
-	}
-	 //console.log(players)
-	 //console.log((players[0][0].name) +" " + (players[0][0].suit));
-};
-
-
-// var fourOfKind = function(){
-// 	if ((players[i].c1.value ===players[i].c2.value ===players[i].c3.value ===players[i].c4.value)) {
-// 		console.log("P-O-K-E-R");
-// 	}
-
-
-// var pair = function() {
-// 	console.log(players[0].c1[0].value);
-// 	for (p in players) {
-// 		for(var c=0; c<5; c++) {
-// 			console.log(players[p].c1[c].value);
+// var checkDrawnCards = function() {
+// 	for(var c in drawnCards) {
+// 		if ( cardPos != drawnCards[c]){
+// 			dealCards();
 // 		}
-		
-	// if((players[p].c1.value ==players[p].c2.value) ||
-	// 	(players[p].c1.value==players[p].c3.value) ||
-	// 	(players[p].c1.value==players[p].c4.value) ||
-	// 	(players[p].c1.value==players[p].c5.value)) //||
-		// (players[p].c2.value==players[p].c3.value) ||
-		// (players[p].c2.value==players[p].c4.value)	||
-		// (players[p].c2.value==players[p].c5.value)	||
-		// (players[p].c3.value==players[p].c4.value)	||
-		// (players[p].c3.value==players[p].c5.value)	||
-		// (players[p].c4.value==players[p].c5.value)	) {
+// 	}
+// }
+// function dealCards() {
+// 	// console.log(cards);
+// 	//For each player that exists, execute this draw card fuction.
+
+// 	for (var eachPlayer = 0; eachPlayer <= numOfPlayers; eachPlayer++) {
+// 		//For each player, they must draw 5 cards.
+// 		for (var x = 0; x <= cardHand - 1; x++) {
+// 			//Find a random card from the shuffled deck
+// 			var cardPos = Math.floor((Math.random() * cards.length) + 0);
+
+// 			checkDrawnCards();
+// 			 //console.log("Deck Position: "+cardPos);
+// 			//Take the card from that position
+
+// 			// console.log(cards[cardPos]);
+// 			drawnCards.push(cardPos);
+
+
+			
+// 			//drawn card
+			
+
+// 			//Place that card into the player's hand.
+// 			playerHand.push(cardPos);
+
+			
+// 		}
+
+// 		var newHand = new Hand();
+// 		//console.log(newHand);
+// 		players.push(newHand);
+// 		console.log(players);
+// 		//Players
+// 			//playerHand
+// 				//object(value,name,suit)
+
+// 		// console.log(playerHand);
+// 		// console.log(playerHand[0][0].suit + playerHand[0][0].name)
+
+// 		// players.push(playerHand);
+
+// 		//
+// 		// console.log("First card in player "+players[eachPlayer]+"'s hand: "+players[0].playerHand[0].Card.name);
+
+// 		//empty playerHand container for a fresh new set of cards for a hand
+// 		playerHand = [];
 		
 // 	}
+// 	 //console.log(players)
+// 	 //console.log((players[0][0].name) +" " + (players[0][0].suit));
+// };
+
+
+// // var fourOfKind = function(){
+// // 	if ((players[i].c1.value ===players[i].c2.value ===players[i].c3.value ===players[i].c4.value)) {
+// // 		console.log("P-O-K-E-R");
+// // 	}
+
+
+// // var pair = function() {
+// // 	console.log(players[0].c1[0].value);
+// // 	for (p in players) {
+// // 		for(var c=0; c<5; c++) {
+// // 			console.log(players[p].c1[c].value);
+// // 		}
+		
+// 	// if((players[p].c1.value ==players[p].c2.value) ||
+// 	// 	(players[p].c1.value==players[p].c3.value) ||
+// 	// 	(players[p].c1.value==players[p].c4.value) ||
+// 	// 	(players[p].c1.value==players[p].c5.value)) //||
+// 		// (players[p].c2.value==players[p].c3.value) ||
+// 		// (players[p].c2.value==players[p].c4.value)	||
+// 		// (players[p].c2.value==players[p].c5.value)	||
+// 		// (players[p].c3.value==players[p].c4.value)	||
+// 		// (players[p].c3.value==players[p].c5.value)	||
+// 		// (players[p].c4.value==players[p].c5.value)	) {
+		
+// // 	}
 	
-// }
+// // }
 
-var exitProgram= function() {
-	console.log("You have exited the Card Suite!");
-	process.exit();
-};
-
-
-
-//runners
-deck();
-dealCards();
-viewHand();
+// //runners
+// deck();
+// dealCards();
+// viewHand();
 //pair();
 //fourOfKind();
 
