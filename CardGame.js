@@ -34,6 +34,7 @@ var wipeScreen = function () {
 
 
 var welcomeScreen = function() {
+	introArt();
 	var gameSelection = sget("Welcome to the Cards Suite! What game would you like to play?\n (1) Poker\n(2) Quit").trim();
 	if (gameSelection == 1) {
 		dealCards();	
@@ -90,16 +91,46 @@ function Card(value, name, suit){
 
 */
 
+var introArt =
+console.log (
+"              __ \n",
+"        _..-''--'----_.\n",
+"      ,''.-''| .---/ _`-._\n",
+"    ,' \ \  ;| | ,/ / `-._`-.\n",
+"  ,' ,',\ \( | |// /,-._  / /\n",
+"  ;.`. `,\ \`| |/ / |   )/ /\n", 
+" / /`_`.\_\ \| /_.-.'-''/ /\n",
+"/ /_|_:.`. \ |;'`..')  / /\n",
+"`-._`-._`.`.;`.\  ,'  / /\n",
+"    `-._`.`/    ,'-._/ /\n", 
+"      : `-/     \`-.._/\n",
+"      |  :      ;._ (\n",
+"      :  |      \  ` \ \n",
+"       \         \   |\n",
+"        :        :   ;\n",
+"        |           / \n",
+"        ;         ,' \n",
+"       /         / \n",                                            
+"     /         / \n",                                             
+"              / \n"  
+);
+
+
+
+
+
+
+
 //functions
 
 
-var checkDrawnCards = function() {
-	for(var c in drawnCards) {
-		if ( cardPos != drawnCards[c]){
-			dealCards();
-		}
-	}
-}
+// var checkDrawnCards = function() {
+// 	for(var c in drawnCards) {
+// 		if ( cardPos != drawnCards[c]){
+// 			dealCards();
+// 		}
+// 	}
+// }
 function dealCards() {
 	// console.log(cards);
 	//For each player that exists, execute this draw card fuction.
