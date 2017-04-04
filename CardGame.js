@@ -142,12 +142,25 @@ function dealCards() {
 
 //
 
-// var viewCards = function() {
-// 	findCard =players[0].cardArray[0]);
-// 	findCard = 17;
-// 	find(deck[17])
-// 	displa
-// }
+var viewCards = function() {
+	
+	for (var p in players) {
+	for (var c in players[p].cardArray) {
+		x=players[p].cardArray[c];
+		x = cards[x];
+		p = parseInt(p);
+		c=parseInt(c);
+		console.log("Player " + (p+1) + " " + "Card " + (c+1) + " is: " + x.name + " " +x.suit);
+	}
+}
+	//for(var i in cardArray)
+	
+	// players[0].cardArray[i] 
+	
+//replace that index of the array with the value of deck at that index
+	//console.log(x);
+	
+}
 
 
 
@@ -164,14 +177,11 @@ checkPlayerAmount();
 console.log(players);
 viewCards();
 
-//pair();
-//fourOfKind();
+
 
 /* Thoughts
 
-1. pull the console log of the cards out to another function to make it easier to view individual hands later
-2. nested for loops like the deck function to print those out
-3.  Poker scenarios
+
 
 1. Royal Flush - same suit A,K,Q,J,10
 2. Straight Flush - same suit, 5 cards in a row
