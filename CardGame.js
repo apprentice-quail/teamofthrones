@@ -48,6 +48,7 @@ var numOfPlayers = 1;
 var players = []; 
 var playerHand = [];
 var cardHand = 5;
+var valueArray =[];
 //
 var name;
 var suit;
@@ -95,7 +96,7 @@ var getCardPos = function(){
 var checkDrawnCards = function() {
 	for(var c in drawnCards) {
 		if ( cardPos == drawnCards[c]){
-			console.log("duplicate");
+			
 			getCardPos();
 		}
 
@@ -151,18 +152,33 @@ var viewCards = function() {
 		p = parseInt(p);
 		c=parseInt(c);
 		console.log("Player " + (p+1) + " " + "Card " + (c+1) + " is: " + x.name + " " +x.suit);
+
 	}
 }
-	//for(var i in cardArray)
 	
-	// players[0].cardArray[i] 
+};
+
+var highCard = function() {
+	// for (var p in players) {
+	for (var c in players[0].cardArray) {
+		x=players[0].cardArray[c];
+		x = cards[x];
+		// p = parseInt(p);
+		// c=parseInt(c);
+		
+
+	valueArray.push(x.value);
 	
-//replace that index of the array with the value of deck at that index
-	//console.log(x);
 	
 }
-
-
+//}
+	console.log(valueArray);
+	var results = Math.max(valueArray);
+	console.log(results);
+	//sort the cardArrays for each player
+	//the highest value is the high card
+	//display the actual card that represents that cardpsosition
+};
 
 var exitProgram= function() {
 	console.log("You have exited the Card Suite!");
@@ -174,8 +190,9 @@ var exitProgram= function() {
 //runners
 deck();
 checkPlayerAmount();
-console.log(players);
+
 viewCards();
+highCard();
 
 
 
