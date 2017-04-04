@@ -4,8 +4,6 @@
 var sget = require("sget");
 
 
-
-
 //sleep function
 var sleep = function(milliseconds) {
     var start = new Date().getTime();
@@ -21,19 +19,38 @@ var wipeScreen = function () {
   return process.stdout.write('\033c');
 };
 
-
+var numOfPlayers;
 
 var welcomeScreen = function() {
-	var gameSelection = sget("Welcome to the Cards Suite! What game would you like to play?\n (1) Poker\n(2) Quit").trim();
+	var gameSelection = sget("Welcome to the Cards Suite! What game would you like to play?\n(1)Poker\n(2)Quit").trim();
 	if (gameSelection == 1) {
-		dealCards();	
-	} else if (gameSelection ==2) {
+		playerCount();
+		// dealCards();	
+	} else if (gameSelection == 2) {
 		exitProgram();
-	} else { console.log("Listen fancypants, stop that.");
+	} else { 
+		console.log("Listen fancypants, stop that.");
 		welcomeScreen();
 	}
 
 };
+
+var playerCount = function() {
+	var totalPlayers = sget("Select a number of players (2-7).").trim();
+	if (totalPlayers.length >1){
+		console.log("Please enter a number between 2-7.");
+		playerCount();
+	} else if (totalPlayers >=2 && totalPlayers<=7){
+		console.log("You have selected " + totalPlayers + " players.");
+		numOfPlayers = totalPlayers;
+		teststuff();
+	} else {console.log("Please enter a valid number.");
+		playerCount();}
+};
+
+teststuff = function(){
+	console.log(numOfPlayers);
+}
 
 
 
@@ -43,6 +60,7 @@ var welcomeScreen = function() {
 // newDeck = [♣︎13♦13︎♥13︎♠13︎];
 // shuffledDeck = [];
 // discardPile = [];
+
 var drawnCards = [];
 var numOfPlayers = 1;
 var players = []; 
@@ -67,21 +85,22 @@ function Card(value, name, suit){
  var deck = function (){
 	names = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 	suits = ['♥︎','♦︎','♠︎','♣︎'];
+
 	
     
-    for( var s = 0; s < suits.length; s++ ) {
-        for( var n = 0; n < names.length; n++ ) {
-            cards.push( new Card( n+1, names[n], suits[s] ) );
-        }
-    }    
-    // return cards;
-    // console.log(cards);
- }
-/*
+//     for( var s = 0; s < suits.length; s++ ) {
+//         for( var n = 0; n < names.length; n++ ) {
+//             cards.push( new Card( n+1, names[n], suits[s] ) );
+//         }
+//     }    
+//     // return cards;
+//     // console.log(cards);
+//  }
+// /*
 
-*/
+// */
 
-//functions
+// //functions
 
 var Player = function(cardArray) {
 	this.cardArray = cardArray;
@@ -91,6 +110,7 @@ var getCardPos = function(){
 	cardPos = Math.floor((Math.random() * cards.length) + 0);
 	checkDrawnCards();
 }
+
 
 var checkDrawnCards = function() {
 	for(var c in drawnCards) {
@@ -118,29 +138,49 @@ function dealCards() {
 	//For each player, they must draw 5 cards.
 		for (var x = 0; x <= cardHand - 1; x++) {
 			//Find a random card from the shuffled deck
-			
 			getCardPos();
-			
-		
 			drawnCards.push(cardPos);
-
 			playerHand.push(cardPos);
 			console.log(playerHand);
 
-			
-		}
 
-		var newhand = new Player(playerHand);
+			
+// 		}
+
+
+// 		var newHand = new Hand();
+// 		//console.log(newHand);
+// 		players.push(newHand);
+// 		console.log(players);
+// 		//Players
+// 			//playerHand
+// 				//object(value,name,suit)
+
+// 		// console.log(playerHand);
+// 		// console.log(playerHand[0][0].suit + playerHand[0][0].name)
+
+// 		// players.push(playerHand);
+
+// 		//
+// 		// console.log("First card in player "+players[eachPlayer]+"'s hand: "+players[0].playerHand[0].Card.name);
+
+// 		//empty playerHand container for a fresh new set of cards for a hand
+// 		playerHand = [];
+		
+// 	}
+// 	 //console.log(players)
+// 	 //console.log((players[0][0].name) +" " + (players[0][0].suit));
+// };
+
+var newhand = new Player(playerHand);
 		players.push(newhand);
 			playerHand=[];
-			
-		
-		
-	
-	 
+
 };
 
+
 //
+
 
 var viewCards = function() {
 	
@@ -176,8 +216,6 @@ deck();
 checkPlayerAmount();
 console.log(players);
 viewCards();
-
-
 
 /* Thoughts
 
