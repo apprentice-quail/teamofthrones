@@ -108,6 +108,8 @@ var checkPlayerAmount = function() {
 	viewCards();
 	highCard();	
 	pair();
+	checkFlush();
+
 }
 
 function dealCards() {
@@ -139,7 +141,7 @@ var viewCards = function() {
 		x = cards[x];
 		p = parseInt(p);
 		c=parseInt(c);
-		console.log("Player " + (p+1) + " " + "Card " + (c+1) + " is: " + x.name + " " +x.suit);
+		console.log("Player " + (p+1) + "'s Hand: " + x.name + " " +x.suit);
 
 	}
 }
@@ -170,15 +172,44 @@ var highCard = function() {
 };
 
 
+var checkFlush = function () {
 
-
-
-
-
-
-var pair = function() {
 
 	var results;
+	for (var p in players) {
+		for (var c in players[p].cardArray) {
+			x = players[p].cardArray[c];
+			x = cards[x];
+			// p = parseInt(p);
+			// c=parseInt(c);
+			// parseInt(x.value);
+			// console.log(x.value);
+
+			valueArray.push(x.suit);
+			if (valueArray[0] == valueArray[5]){
+				p = parseInt(p);
+				console.log("Player "+(p+1)+"You have a flush!");
+
+			} else if (valueArray[0] != valueArray[c]) {
+				console.log("Diffferent suit!");
+				break;
+			} else if (valueArray[0] == valueArray[c]){
+				console.log("Same Suit!");
+			}
+
+		}
+		
+		// var results = valueArray.indexOf(Math.max(...valueArray));
+		// var cPos = players[p].cardArray[results];
+		// var displayresult = cards[cPos];
+		// p = parseInt(p);
+		// console.log("Player "+(p+1)+", your highest card is "+ displayresult.suit +""+displayresult.name);
+		valueArray = [];
+	}
+}
+
+var pair = function() {
+  var results;
 	for (var p in players) {
 		for (var c in players[p].cardArray) {
 			x = players[p].cardArray[c];
@@ -213,7 +244,6 @@ var checkDup = function() {
     }
     return false;
 }
-		
 
 var exitProgram= function() {
 	console.log("You have exited the Card Suite!");
