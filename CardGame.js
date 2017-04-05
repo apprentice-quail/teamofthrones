@@ -1,5 +1,4 @@
 
-
 //tools
 var sget = require("sget");
 
@@ -48,16 +47,7 @@ var playerCount = function() {
 	} else {console.log("Please enter a valid number.");
 		playerCount();}
 };
-
-
-
-
 //variables
-
-// icons: ♣︎ ♦︎ ♥︎ ♠︎
-// newDeck = [♣︎13♦13︎♥13︎♠13︎];
-// shuffledDeck = [];
-// discardPile = [];
 
 var drawnCards = [];
 var numOfPlayers = 1;
@@ -65,7 +55,6 @@ var players = [];
 var playerHand = [];
 var cardHand = 5;
 var valueArray =[];
-//
 var name;
 var suit;
 var value;
@@ -85,19 +74,12 @@ function Card(value, name, suit){
 	names = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 	suits = ['♥︎','♦︎','♠︎','♣︎'];
 
-
-    
     for( var s = 0; s < suits.length; s++ ) {
         for( var n = 0; n < names.length; n++ ) {
             cards.push( new Card( n+1, names[n], suits[s] ) );
         }
     }    
-//     
-  }
-// /*
-
-// */
-
+}
 // //functions
 
 var Player = function(cardArray) {
@@ -113,10 +95,8 @@ var getCardPos = function(){
 var checkDrawnCards = function() {
 	for(var c in drawnCards) {
 		if ( cardPos == drawnCards[c]){
-			
 			getCardPos();
 		}
-
 	}
 }
 
@@ -125,54 +105,24 @@ var checkPlayerAmount = function() {
 	for (var eachPlayer = 0; eachPlayer < numOfPlayers; eachPlayer++){
 		dealCards();
 	}
-		viewCards();	
-
-	
+	viewCards();
+	highCard();	
 }
 
 function dealCards() {
 	// console.log(cards);
 	//For each player that exists, execute this draw card fuction.
 	//For each player, they must draw 5 cards.
-		for (var x = 0; x <= cardHand - 1; x++) {
-			//Find a random card from the shuffled deck
-			getCardPos();
-			drawnCards.push(cardPos);
-			playerHand.push(cardPos);
-			
+	for (var x = 0; x <= cardHand - 1; x++) {
+		//Find a random card from the shuffled deck
+		getCardPos();
+		drawnCards.push(cardPos);
+		playerHand.push(cardPos);
+	}
 
-
-			
- 		}
-
-
-// 		var newHand = new Hand();
-// 		//console.log(newHand);
-// 		players.push(newHand);
-// 		console.log(players);
-// 		//Players
-// 			//playerHand
-// 				//object(value,name,suit)
-
-// 		// console.log(playerHand);
-// 		// console.log(playerHand[0][0].suit + playerHand[0][0].name)
-
-// 		// players.push(playerHand);
-
-// 		//
-// 		// console.log("First card in player "+players[eachPlayer]+"'s hand: "+players[0].playerHand[0].Card.name);
-
-// 		//empty playerHand container for a fresh new set of cards for a hand
-// 		playerHand = [];
-		
-// 	}
-// 	 //console.log(players)
-// 	 //console.log((players[0][0].name) +" " + (players[0][0].suit));
-// };
-
-var newhand = new Player(playerHand);
-		players.push(newhand);
-			playerHand=[];
+	var newhand = new Player(playerHand);
+	players.push(newhand);
+	playerHand=[];
 
 };
 
@@ -197,24 +147,25 @@ var viewCards = function() {
 
 var highCard = function() {
 	// for (var p in players) {
-	for (var c in players[0].cardArray) {
-		x=players[0].cardArray[c];
-		x = cards[x];
-		// p = parseInt(p);
-		// c=parseInt(c);
-		
+	var results;
+	for (var p in players) {
+		for (var c in players[p].cardArray) {
+			x = players[p].cardArray[c];
+			x = cards[x];
+			// p = parseInt(p);
+			// c=parseInt(c);
+			// parseInt(x.value);
+			// console.log(x.value);
+			valueArray.push(x.value);
 
-	valueArray.push(x.value);
-	
-	
-}
-//}
-	console.log(valueArray);
-	var results = Math.max(valueArray);
-	console.log(results);
-	//sort the cardArrays for each player
-	//the highest value is the high card
-	//display the actual card that represents that cardpsosition
+		}
+		var results = valueArray.indexOf(Math.max(...valueArray));
+		var cPos = players[p].cardArray[results];
+		var displayresult = cards[cPos];
+		p = parseInt(p);
+		console.log("Player "+(p+1)+", your highest card is "+ displayresult.suit +""+displayresult.name);
+		valueArray = [];
+	}
 };
 
 var exitProgram= function() {
@@ -222,18 +173,7 @@ var exitProgram= function() {
 	process.exit();
 };
 
-
-
-//runners
-// deck();
-// checkPlayerAmount();
-
-// viewCards();
-// highCard();
-
 /* Thoughts
-
-
 
 1. Royal Flush - same suit A,K,Q,J,10
 2. Straight Flush - same suit, 5 cards in a row
