@@ -125,7 +125,7 @@ var checkPlayerAmount = function() {
 	for (var eachPlayer = 0; eachPlayer < numOfPlayers; eachPlayer++){
 		dealCards();
 	}
-		
+		viewCards();	
 
 	
 }
@@ -139,7 +139,7 @@ function dealCards() {
 			getCardPos();
 			drawnCards.push(cardPos);
 			playerHand.push(cardPos);
-			viewCards();
+			
 
 
 			
