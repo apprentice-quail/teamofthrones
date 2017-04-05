@@ -107,6 +107,7 @@ var checkPlayerAmount = function() {
 	}
 	viewCards();
 	highCard();	
+	pair();
 }
 
 function dealCards() {
@@ -167,6 +168,52 @@ var highCard = function() {
 		valueArray = [];
 	}
 };
+
+
+
+
+
+
+
+
+var pair = function() {
+
+	var results;
+	for (var p in players) {
+		for (var c in players[p].cardArray) {
+			x = players[p].cardArray[c];
+			x = cards[x];
+			// p = parseInt(p);
+			// c=parseInt(c);
+			// parseInt(x.value);
+			// console.log(x.value);
+			valueArray.push(x.value);
+
+
+		};
+		//console.log( "This is the value array " + valueArray)
+		checkDup();
+		if (checkDup()==true) {
+			console.log("You have a Pair!")
+		} else {
+			console.log("Sorry, no Pairs!")
+		}
+		
+		valueArray=[];
+    }
+  }
+
+var checkDup = function() {
+    for(var i = 0; i <= valueArray.length; i++) {
+        for(var j = i; j <= valueArray.length; j++) {
+            if(i != j && valueArray[i] == valueArray[j]) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+		
 
 var exitProgram= function() {
 	console.log("You have exited the Card Suite!");
