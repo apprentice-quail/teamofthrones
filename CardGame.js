@@ -43,14 +43,12 @@ var playerCount = function() {
 	} else if (totalPlayers >=2 && totalPlayers<=7){
 		console.log("You have selected " + totalPlayers + " players.");
 		numOfPlayers = totalPlayers;
-		teststuff();
+		checkPlayerAmount();
+		
 	} else {console.log("Please enter a valid number.");
 		playerCount();}
 };
 
-teststuff = function(){
-	console.log(numOfPlayers);
-}
 
 
 
@@ -87,16 +85,15 @@ function Card(value, name, suit){
 	names = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 	suits = ['♥︎','♦︎','♠︎','♣︎'];
 
-	
+
     
-//     for( var s = 0; s < suits.length; s++ ) {
-//         for( var n = 0; n < names.length; n++ ) {
-//             cards.push( new Card( n+1, names[n], suits[s] ) );
-//         }
-//     }    
-//     // return cards;
-//     // console.log(cards);
-//  }
+    for( var s = 0; s < suits.length; s++ ) {
+        for( var n = 0; n < names.length; n++ ) {
+            cards.push( new Card( n+1, names[n], suits[s] ) );
+        }
+    }    
+//     
+  }
 // /*
 
 // */
@@ -125,7 +122,7 @@ var checkDrawnCards = function() {
 
 
 var checkPlayerAmount = function() {
-	for (var eachPlayer = 0; eachPlayer < 2; eachPlayer++){
+	for (var eachPlayer = 0; eachPlayer < numOfPlayers; eachPlayer++){
 		dealCards();
 	}
 		
@@ -142,11 +139,11 @@ function dealCards() {
 			getCardPos();
 			drawnCards.push(cardPos);
 			playerHand.push(cardPos);
-			console.log(playerHand);
+			viewCards();
 
 
 			
-// 		}
+ 		}
 
 
 // 		var newHand = new Hand();
@@ -228,11 +225,11 @@ var exitProgram= function() {
 
 
 //runners
-deck();
-checkPlayerAmount();
+// deck();
+// checkPlayerAmount();
 
-viewCards();
-highCard();
+// viewCards();
+// highCard();
 
 /* Thoughts
 
@@ -255,6 +252,7 @@ highCard();
 
 
 var runProgram = function() {
+	deck();
 	welcomeScreen();
 }();
 
