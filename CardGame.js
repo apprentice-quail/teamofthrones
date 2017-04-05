@@ -186,15 +186,15 @@ var checkFlush = function () {
 			// console.log(x.value);
 
 			valueArray.push(x.suit);
-			if (valueArray[0] == valueArray[5]){
+			if (valueArray[0] == valueArray[4]){
 				p = parseInt(p);
-				console.log("Player "+(p+1)+"You have a flush!");
+				console.log("Player "+(p+1)+", you have a flush!");
 
-			} else if (valueArray[0] != valueArray[c]) {
-				console.log("Diffferent suit!");
+			} else if (valueArray[0] != valueArray[c]){
+
 				break;
 			} else if (valueArray[0] == valueArray[c]){
-				console.log("Same Suit!");
+
 			}
 
 		}
@@ -225,9 +225,10 @@ var pair = function() {
 		//console.log( "This is the value array " + valueArray)
 		checkDup();
 		if (checkDup()==true) {
-			console.log("You have a Pair!")
+			p = parseInt(p);
+			console.log("Player "+(p+1)+", you have at least one pair!");
 		} else {
-			console.log("Sorry, no Pairs!")
+
 		}
 		
 		valueArray=[];
