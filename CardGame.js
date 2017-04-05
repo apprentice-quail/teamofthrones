@@ -79,35 +79,29 @@ function Card(value, name, suit){
 	this.value = value;
 	this.name = name;
 	this.suit = suit;
-};
+}
 
  var deck = function (){
 	names = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 	suits = ['♥︎','♦︎','♠︎','♣︎'];
 
-
-    
     for( var s = 0; s < suits.length; s++ ) {
         for( var n = 0; n < names.length; n++ ) {
             cards.push( new Card( n+1, names[n], suits[s] ) );
         }
-    }    
-//     
-  }
-// /*
-
-// */
+    }        
+  };
 
 // //functions
 
 var Player = function(cardArray) {
 	this.cardArray = cardArray;
-}
+};
 
 var getCardPos = function(){
 	cardPos = Math.floor((Math.random() * cards.length) + 0);
 	checkDrawnCards();
-}
+};
 
 
 var checkDrawnCards = function() {
@@ -116,19 +110,16 @@ var checkDrawnCards = function() {
 			
 			getCardPos();
 		}
-
 	}
-}
+};
 
 
 var checkPlayerAmount = function() {
 	for (var eachPlayer = 0; eachPlayer < numOfPlayers; eachPlayer++){
 		dealCards();
-	}
-		
+	}	
+};
 
-	
-}
 
 function dealCards() {
 	// console.log(cards);
@@ -140,10 +131,9 @@ function dealCards() {
 			drawnCards.push(cardPos);
 			playerHand.push(cardPos);
 			viewCards();
-
-
 			
  		}
+ 	}
 
 
 // 		var newHand = new Hand();
@@ -174,11 +164,6 @@ var newhand = new Player(playerHand);
 		players.push(newhand);
 			playerHand=[];
 
-};
-
-
-//
-
 
 var viewCards = function() {
 	
@@ -202,13 +187,8 @@ var highCard = function() {
 		x = cards[x];
 		// p = parseInt(p);
 		// c=parseInt(c);
-		
-
-	valueArray.push(x.value);
-	
-	
-}
-//}
+	valueArray.push(x.value);	
+	}
 	console.log(valueArray);
 	var results = Math.max(valueArray);
 	console.log(results);
@@ -255,5 +235,6 @@ var runProgram = function() {
 	deck();
 	welcomeScreen();
 }();
+
 
 
